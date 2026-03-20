@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **`n8n_create_data_table` MCP tool** (Issue #640): Create data tables in n8n via the REST API
+- **`n8n_create_datatable` MCP tool** (Issue #640): Create data tables in n8n via the REST API
   - `N8nApiClient.createDataTable()` calling `POST /data-tables`
   - Zod-validated handler with `N8nApiError` handling for structured error responses
   - TypeScript interfaces matching the n8n OpenAPI spec (`DataTableColumn`, `DataTableColumnResponse`, `DataTable`)
@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **Health check management tool count**: Updated from 13 to 14 to include `n8n_create_data_table`
+- **Health check management tool count**: Updated from 13 to 14 to include `n8n_create_datatable`
 
 Conceived by Romuald Członkowski - https://www.aiadvisors.pl/en
 

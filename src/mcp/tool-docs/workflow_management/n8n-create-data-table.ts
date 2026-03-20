@@ -1,12 +1,12 @@
 import { ToolDocumentation } from '../types';
 
 export const n8nCreateDataTableDoc: ToolDocumentation = {
-  name: 'n8n_create_data_table',
+  name: 'n8n_create_datatable',
   category: 'workflow_management',
   essentials: {
     description: 'Create a new data table in n8n. Requires n8n enterprise or cloud with the data tables feature enabled.',
     keyParameters: ['name', 'columns'],
-    example: 'n8n_create_data_table({name: "Contacts", columns: [{name: "email", type: "string"}]})',
+    example: 'n8n_create_datatable({name: "Contacts", columns: [{name: "email", type: "string"}]})',
     performance: 'Fast (100-300ms)',
     tips: [
       'Available column types: string, number, boolean, date, json',
@@ -27,9 +27,9 @@ export const n8nCreateDataTableDoc: ToolDocumentation = {
     },
     returns: 'Object with id and name of the created data table on success.',
     examples: [
-      'n8n_create_data_table({name: "Orders"}) - Create table without columns',
-      'n8n_create_data_table({name: "Contacts", columns: [{name: "email", type: "string"}, {name: "score", type: "number"}]}) - Create table with typed columns',
-      'n8n_create_data_table({name: "Events", columns: [{name: "payload", type: "json"}, {name: "occurred_at", type: "date"}]})'
+      'n8n_create_datatable({name: "Orders"}) - Create table without columns',
+      'n8n_create_datatable({name: "Contacts", columns: [{name: "email", type: "string"}, {name: "score", type: "number"}]}) - Create table with typed columns',
+      'n8n_create_datatable({name: "Events", columns: [{name: "payload", type: "json"}, {name: "occurred_at", type: "date"}]})'
     ],
     useCases: [
       'Persist structured workflow data across executions',

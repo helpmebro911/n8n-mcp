@@ -608,7 +608,7 @@ export const n8nManagementTools: ToolDefinition[] = [
     },
   },
   {
-    name: 'n8n_create_data_table',
+    name: 'n8n_create_datatable',
     description: 'Create a new data table in n8n. Requires n8n enterprise or cloud with data tables feature.',
     inputSchema: {
       type: 'object',

@@ -62,7 +62,7 @@ export const toolsDocumentation: Record<string, ToolDocumentation> = {
   n8n_executions: n8nExecutionsDoc,
   n8n_workflow_versions: n8nWorkflowVersionsDoc,
   n8n_deploy_template: n8nDeployTemplateDoc,
-  n8n_create_data_table: n8nCreateDataTableDoc
+  n8n_create_datatable: n8nCreateDataTableDoc
 };
 
 // Re-export types

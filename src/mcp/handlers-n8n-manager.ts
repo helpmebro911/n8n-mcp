@@ -1975,7 +1975,7 @@ export async function handleDiagnostic(request: any, context?: InstanceContext):
 
   // Check which tools are available
   const documentationTools = 7; // Base documentation tools (after v2.26.0 consolidation)
-  const managementTools = apiConfigured ? 14 : 0; // Management tools requiring API (includes n8n_create_data_table)
+  const managementTools = apiConfigured ? 14 : 0; // Management tools requiring API (includes n8n_create_datatable)
   const totalTools = documentationTools + managementTools;
 
   // Check npm version
