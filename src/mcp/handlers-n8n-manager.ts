@@ -8,7 +8,7 @@ import {
   WebhookRequest,
   McpToolResponse,
   ExecutionFilterOptions,
-  ExecutionMode
+  ExecutionMode,
 } from '../types/n8n-api';
 import type { TriggerType, TestWorkflowInput } from '../triggers/types';
 import {
@@ -383,6 +383,7 @@ const createWorkflowSchema = z.object({
     executionTimeout: z.number().optional(),
     errorWorkflow: z.string().optional(),
   }).optional(),
+  projectId: z.string().optional(),
 });
 
 const updateWorkflowSchema = z.object({
@@ -1974,7 +1975,7 @@ export async function handleDiagnostic(request: any, context?: InstanceContext):
 
   // Check which tools are available
   const documentationTools = 7; // Base documentation tools (after v2.26.0 consolidation)
-  const managementTools = apiConfigured ? 13 : 0; // Management tools requiring API (includes n8n_deploy_template)
+  const managementTools = apiConfigured ? 14 : 0; // Management tools requiring API (includes n8n_create_data_table)
   const totalTools = documentationTools + managementTools;
 
   // Check npm version
@@ -2674,6 +2675,61 @@ export async function handleTriggerWebhookWorkflow(args: unknown, context?: Inst
         };
       }
 
+      return {
+        success: false,
+        error: getUserFriendlyErrorMessage(error),
+        code: error.code,
+        details: error.details as Record<string, unknown> | undefined
+      };
+    }
+
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error occurred'
+    };
+  }
+}
+
+// ========================================================================
+// Data Table Handler
+// ========================================================================
+
+const createDataTableSchema = z.object({
+  name: z.string().min(1, 'Table name cannot be empty'),
+  columns: z.array(z.object({
+    name: z.string().min(1, 'Column name cannot be empty'),
+    type: z.enum(['string', 'number', 'boolean', 'date', 'json']).optional(),
+  })).optional(),
+});
+
+export async function handleCreateDataTable(args: unknown, context?: InstanceContext): Promise<McpToolResponse> {
+  try {
+    const client = ensureApiConfigured(context);
+    const input = createDataTableSchema.parse(args);
+    const dataTable = await client.createDataTable(input);
+
+    if (!dataTable || !dataTable.id) {
+      return {
+        success: false,
+        error: 'Data table creation failed: n8n API returned an empty or invalid response'
+      };
+    }
+
+    return {
+      success: true,
+      data: { id: dataTable.id, name: dataTable.name },
+      message: `Data table "${dataTable.name}" created with ID: ${dataTable.id}`
+    };
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return {
+        success: false,
+        error: 'Invalid input',
+        details: { errors: error.errors }
+      };
+    }
+
+    if (error instanceof N8nApiError) {
       return {
         success: false,
         error: getUserFriendlyErrorMessage(error),

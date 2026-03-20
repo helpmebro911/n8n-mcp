@@ -455,3 +455,25 @@ export interface ErrorSuggestion {
   description: string;
   confidence: 'high' | 'medium' | 'low';
 }
+
+// Data Table types
+export interface DataTableColumn {
+  name: string;
+  type?: 'string' | 'number' | 'boolean' | 'date' | 'json';
+}
+
+export interface DataTableColumnResponse {
+  id: string;
+  name: string;
+  type: 'string' | 'number' | 'boolean' | 'date' | 'json';
+  index: number;
+}
+
+export interface DataTable {
+  id: string;
+  name: string;
+  columns?: DataTableColumnResponse[];
+  projectId?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}

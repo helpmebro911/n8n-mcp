@@ -22,6 +22,8 @@ import {
   SourceControlStatus,
   SourceControlPullResult,
   SourceControlPushResult,
+  DataTable,
+  DataTableColumn,
 } from '../types/n8n-api';
 import { handleN8nApiError, logN8nError } from '../utils/n8n-errors';
 import { cleanWorkflowForCreate, cleanWorkflowForUpdate } from './n8n-validation';
@@ -577,6 +579,15 @@ export class N8nApiClient {
   async deleteVariable(id: string): Promise<void> {
     try {
       await this.client.delete(`/variables/${id}`);
+    } catch (error) {
+      throw handleN8nApiError(error);
+    }
+  }
+
+  async createDataTable(params: { name: string; columns?: DataTableColumn[] }): Promise<DataTable> {
+    try {
+      const response = await this.client.post('/data-tables', params);
+      return response.data;
     } catch (error) {
       throw handleN8nApiError(error);
     }

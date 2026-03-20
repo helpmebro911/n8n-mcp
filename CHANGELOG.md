@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.39.0] - 2026-03-20
+
+### Added
+
+- **`n8n_create_data_table` MCP tool** (Issue #640): Create data tables in n8n via the REST API
+  - `N8nApiClient.createDataTable()` calling `POST /data-tables`
+  - Zod-validated handler with `N8nApiError` handling for structured error responses
+  - TypeScript interfaces matching the n8n OpenAPI spec (`DataTableColumn`, `DataTableColumnResponse`, `DataTable`)
+  - Column types per spec: `string | number | boolean | date | json`
+  - Input validation: `.min(1)` on table name and column names
+  - Tool documentation with examples, use cases, and pitfalls
+  - Requires n8n enterprise or cloud with data tables feature enabled
+- **`projectId` parameter for `n8n_create_workflow`**: Create workflows directly in a specific team project (enterprise feature)
+
+### Fixed
+
+- **Health check management tool count**: Updated from 13 to 14 to include `n8n_create_data_table`
+
+Conceived by Romuald Członkowski - https://www.aiadvisors.pl/en
+
 ## [2.38.0] - 2026-03-20
 
 ### Added

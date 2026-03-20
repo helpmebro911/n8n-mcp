@@ -1300,6 +1300,59 @@ describe('N8nApiClient', () => {
     });
   });
 
+  describe('createDataTable', () => {
+    beforeEach(() => {
+      client = new N8nApiClient(defaultConfig);
+    });
+
+    it('should create data table with name and columns', async () => {
+      const params = {
+        name: 'My Table',
+        columns: [
+          { name: 'email', type: 'string' as const },
+          { name: 'count', type: 'number' as const },
+        ],
+      };
+      const createdTable = { id: 'dt-1', name: 'My Table', columns: [] };
+
+      mockAxiosInstance.post.mockResolvedValue({ data: createdTable });
+
+      const result = await client.createDataTable(params);
+
+      expect(mockAxiosInstance.post).toHaveBeenCalledWith('/data-tables', params);
+      expect(result).toEqual(createdTable);
+    });
+
+    it('should create data table without columns', async () => {
+      const params = { name: 'Empty Table' };
+      const createdTable = { id: 'dt-2', name: 'Empty Table' };
+
+      mockAxiosInstance.post.mockResolvedValue({ data: createdTable });
+
+      const result = await client.createDataTable(params);
+
+      expect(mockAxiosInstance.post).toHaveBeenCalledWith('/data-tables', params);
+      expect(result).toEqual(createdTable);
+    });
+
+    it('should handle 400 error', async () => {
+      const error = {
+        message: 'Request failed',
+        response: { status: 400, data: { message: 'Invalid table name' } },
+      };
+      await mockAxiosInstance.simulateError('post', error);
+
+      try {
+        await client.createDataTable({ name: '' });
+        expect.fail('Should have thrown an error');
+      } catch (err) {
+        expect(err).toBeInstanceOf(N8nValidationError);
+        expect((err as N8nValidationError).message).toBe('Invalid table name');
+        expect((err as N8nValidationError).statusCode).toBe(400);
+      }
+    });
+  });
+
   describe('interceptors', () => {
     let requestInterceptor: any;
     let responseInterceptor: any;
