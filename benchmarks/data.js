@@ -1,37 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1774025557800,
+  "lastUpdate": 1774116553220,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "romualdczlonkowski@MacBook-Pro-Romuald.local",
-            "name": "Romuald Członkowski"
-          },
-          "committer": {
-            "email": "romualdczlonkowski@MacBook-Pro-Romuald.local",
-            "name": "Romuald Członkowski"
-          },
-          "distinct": true,
-          "id": "6e85c68d6259eb78b256f5ac4559ba3e665e0886",
-          "message": "chore: bump version to 2.29.3 to trigger OIDC publish\n\nThe previous workflow re-run used cached old workflow code with\nNPM_TOKEN. This version bump triggers a fresh workflow run with\nthe new OIDC Trusted Publishing configuration.\n\nConceived by Romuald Członkowski - www.aiadvisors.pl/en\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>",
-          "timestamp": "2025-12-12T13:48:11+01:00",
-          "tree_id": "75e0a58025fd75c9285d68d7eca4cbc5f0ebb877",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/6e85c68d6259eb78b256f5ac4559ba3e665e0886"
-        },
-        "date": 1765543862564,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0136,
-            "range": "0.3096",
-            "unit": "ms",
-            "extra": "73341 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -1534,6 +1505,37 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/47a1cb135db7fd4a9f02d694286c5091dc86cbe2"
         },
         "date": 1774025557446,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0136,
+            "range": "0.3096",
+            "unit": "ms",
+            "extra": "73341 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "be3d07dbdc6e18c05da99337920cce94426f7a6a",
+          "message": "feat: add n8n_manage_datatable MCP tool with full CRUD (#640) (#650)\n\n* feat: add n8n_create_data_table MCP tool and projectId for create workflow (#640)\n\nAdd new MCP tool to create n8n data tables via the REST API:\n- n8n_create_data_table tool definition with name + columns schema\n- handleCreateDataTable handler with Zod validation and N8nApiError handling\n- N8nApiClient.createDataTable() calling POST /data-tables\n- DataTable, DataTableColumn, DataTableColumnResponse types per OpenAPI spec\n- Column types: string | number | boolean | date | json\n- Input validation: .min(1) on table name and column names\n- Tool documentation with examples, use cases, and pitfalls\n\nAlso adds projectId parameter to n8n_create_workflow for enterprise\nproject support, and fixes stale management tool count in health check.\n\nBased on work by @djakielski in PR #646.\nCo-Authored-By: Dominik Jakielski <dominik.jakielski@urlaubsguru.de>\n\nConceived by Romuald Członkowski - https://www.aiadvisors.pl/en\n\nCo-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>\n\n* feat: replace n8n_create_data_table with n8n_manage_datatable (10 actions)\n\nReplaces the single-purpose n8n_create_data_table tool with a comprehensive\nn8n_manage_datatable tool covering all 10 n8n data table API endpoints:\n\nTable operations: createTable, listTables, getTable, updateTable, deleteTable\nRow operations: getRows, insertRows, updateRows, upsertRows, deleteRows\n\n- Filter system with and/or logic and 8 condition operators\n- Dry-run support for updateRows, upsertRows, deleteRows\n- Pagination, sorting, and full-text search for row listing\n- 9 new N8nApiClient methods for all data table endpoints\n- Shared error handler and consolidated Zod schemas\n- Comprehensive tool documentation with examples per action\n- 36 handler tests + 18 API client tests\n\nBREAKING: n8n_create_data_table removed. Use n8n_manage_datatable with\naction=\"createTable\" instead.\n\nBased on work by @djakielski in PR #646.\nCo-Authored-By: Dominik Jakielski <dominik.jakielski@urlaubsguru.de>\n\nConceived by Romuald Członkowski - https://www.aiadvisors.pl/en",
+          "timestamp": "2026-03-21T19:06:22+01:00",
+          "tree_id": "ee72a38f5e97543560230663aac76a8f9a3c26cc",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/be3d07dbdc6e18c05da99337920cce94426f7a6a"
+        },
+        "date": 1774116552531,
         "tool": "customSmallerIsBetter",
         "benches": [
           {
