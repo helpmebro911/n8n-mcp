@@ -1,37 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1774116553220,
+  "lastUpdate": 1774134918115,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "romualdczlonkowski@MacBook-Pro-Romuald.local",
-            "name": "Romuald Członkowski"
-          },
-          "committer": {
-            "email": "romualdczlonkowski@MacBook-Pro-Romuald.local",
-            "name": "Romuald Członkowski"
-          },
-          "distinct": true,
-          "id": "c6f3733fbd6de37b1514f5800cb8d43bded30eee",
-          "message": "fix: upgrade npm for OIDC trusted publishing support\n\nOIDC trusted publishing requires npm >= 11.5.1, but Node.js 20/22\nships with npm 10.x. Added explicit npm upgrade step before publish.\n\nAlso upgraded to Node.js 22 for better npm compatibility.\n\nConceived by Romuald Członkowski - www.aiadvisors.pl/en\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>",
-          "timestamp": "2025-12-12T14:17:23+01:00",
-          "tree_id": "9ba01f9525d17511d27acffe82237b3ec98b5e23",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/c6f3733fbd6de37b1514f5800cb8d43bded30eee"
-        },
-        "date": 1765545538067,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0136,
-            "range": "0.3096",
-            "unit": "ms",
-            "extra": "73341 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -1536,6 +1507,37 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/be3d07dbdc6e18c05da99337920cce94426f7a6a"
         },
         "date": 1774116552531,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0136,
+            "range": "0.3096",
+            "unit": "ms",
+            "extra": "73341 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c5665632af4d1d2366bcbf8d079d48c38e4fbecb",
+          "message": "fix: resolve 5 bugs in n8n_manage_datatable (#651)",
+          "timestamp": "2026-03-22T00:12:39+01:00",
+          "tree_id": "3f5522660cb7a912b655a9ae6e10687ada1c5818",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/c5665632af4d1d2366bcbf8d079d48c38e4fbecb"
+        },
+        "date": 1774134917814,
         "tool": "customSmallerIsBetter",
         "benches": [
           {
