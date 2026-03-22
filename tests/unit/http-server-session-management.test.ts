@@ -1287,5 +1287,21 @@ describe('HTTP Server Session Management', () => {
 
       expect(res.status).toHaveBeenCalledWith(400);
     });
+
+    it('should return 400 for mixed batch (notification + request) with stale session', async () => {
+      server = new SingleSessionHTTPServer();
+
+      const { req, res } = createMockReqRes();
+      req.headers = { 'mcp-session-id': 'stale-session-that-does-not-exist' };
+      req.method = 'POST';
+      req.body = [
+        { jsonrpc: '2.0', method: 'notifications/initialized' },
+        { jsonrpc: '2.0', method: 'tools/list', id: 1 },
+      ];
+
+      await server.handleRequest(req as any, res as any);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+    });
   });
 });

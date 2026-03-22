@@ -256,17 +256,18 @@ export class SingleSessionHTTPServer {
 
   /**
    * Checks if a request body is a JSON-RPC notification (or batch of only notifications).
-   * Notifications have a `method` field but no `id` field per JSON-RPC 2.0 spec.
+   * Per JSON-RPC 2.0 §4.1, a notification is a request without an "id" member.
+   * Note: `!('id' in msg)` is strict — messages with `id: null` are treated as
+   * requests, not notifications. This is spec-compliant.
    */
   private isJsonRpcNotification(body: unknown): boolean {
     if (!body || typeof body !== 'object') return false;
+    const isSingleNotification = (msg: any): boolean =>
+      msg && typeof msg.method === 'string' && !('id' in msg);
     if (Array.isArray(body)) {
-      return body.length > 0 && body.every(
-        (msg: any) => msg && typeof msg.method === 'string' && !('id' in msg)
-      );
+      return body.length > 0 && body.every(isSingleNotification);
     }
-    const msg = body as Record<string, unknown>;
-    return typeof msg.method === 'string' && !('id' in msg);
+    return isSingleNotification(body);
   }
   
   /**
@@ -629,12 +630,10 @@ export class SingleSessionHTTPServer {
           logger.info('handleRequest: Reusing existing transport for session', { sessionId });
           transport = this.transports[sessionId];
 
-          // TOCTOU guard: session may have been removed between the check and this line
+          // TOCTOU guard: session may have been removed between the check above and here
           if (!transport) {
             if (this.isJsonRpcNotification(req.body)) {
-              logger.info('handleRequest: Session removed during lookup, accepting notification', {
-                sessionId,
-              });
+              logger.info('handleRequest: Session removed during lookup, accepting notification', { sessionId });
               res.status(202).end();
               return;
             }
@@ -660,10 +659,7 @@ export class SingleSessionHTTPServer {
           this.updateSessionAccess(sessionId);
           
         } else {
-          // Check if this is a JSON-RPC notification (no "id" field = fire-and-forget)
-          // Per JSON-RPC 2.0 spec, notifications don't expect responses.
-          // Returning 400 for stale-session notifications causes Claude's proxy to
-          // interpret the connection as broken, triggering reconnection storms (#654).
+          // Notifications are fire-and-forget; returning 400 triggers reconnection storms (#654)
           if (this.isJsonRpcNotification(req.body)) {
             logger.info('handleRequest: Accepting notification for stale/missing session', {
               method: req.body?.method,
