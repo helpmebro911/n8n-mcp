@@ -1,39 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1774191730924,
+  "lastUpdate": 1774206174979,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "Romuald Członkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "0f13e7aeee497d03c80e2a2e50227aed1e57a0a8",
-          "message": "chore: update n8n to 2.0.2 and bump version to 2.30.0 (#487)\n\n- Updated n8n from 1.123.4 to 2.0.2\n- Updated n8n-core from 1.122.1 to 2.0.1\n- Updated n8n-workflow from 1.120.0 to 2.0.1\n- Updated @n8n/n8n-nodes-langchain from 1.122.1 to 2.0.1\n- Rebuilt node database with 541 nodes (435 from n8n-nodes-base, 106 from @n8n/n8n-nodes-langchain)\n- Updated README badge with new n8n version\n- Updated CHANGELOG with dependency changes\n\nConceived by Romuald Członkowski - https://www.aiadvisors.pl/en\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-authored-by: Romuald Członkowski <romualdczlonkowski@MacBook-Pro-Romuald.local>\nCo-authored-by: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-12-15T23:34:49+01:00",
-          "tree_id": "f137970fb5ce3f036135bb967cf55180407a7f4c",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/0f13e7aeee497d03c80e2a2e50227aed1e57a0a8"
-        },
-        "date": 1765838207599,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0136,
-            "range": "0.3096",
-            "unit": "ms",
-            "extra": "73341 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -1540,6 +1509,37 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/6f6668acc42a572b0932b581efd0b430a7859322"
         },
         "date": 1774191730454,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0136,
+            "range": "0.3096",
+            "unit": "ms",
+            "extra": "73341 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ec19c9dade49d89995b77af364d7310c1665c1b5",
+          "message": "fix: return 202 for stale-session notifications, warn on updateTable columns (#654) (#655)",
+          "timestamp": "2026-03-22T19:59:57+01:00",
+          "tree_id": "6d9c8023ade48de5a38443ec8465b44332d97ace",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/ec19c9dade49d89995b77af364d7310c1665c1b5"
+        },
+        "date": 1774206174636,
         "tool": "customSmallerIsBetter",
         "benches": [
           {
