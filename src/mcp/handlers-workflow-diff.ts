@@ -36,10 +36,16 @@ const NODE_TARGETING_OPERATIONS = new Set([
   'updateNode', 'removeNode', 'moveNode', 'enableNode', 'disableNode'
 ]);
 
+// Parse JSON strings to values — VS Code extension sends arrays as JSON strings (#600)
+function tryParseJson(val: unknown): unknown {
+  if (typeof val !== 'string') return val;
+  try { return JSON.parse(val); } catch { return val; }
+}
+
 // Zod schema for the diff request
 const workflowDiffSchema = z.object({
   id: z.string(),
-  operations: z.array(z.object({
+  operations: z.preprocess(tryParseJson, z.array(z.object({
     type: z.string(),
     description: z.string().optional(),
     // Node operations
@@ -87,7 +93,7 @@ const workflowDiffSchema = z.object({
       }
     }
     return op;
-  })),
+  }))),
   validateOnly: z.boolean().optional(),
   continueOnError: z.boolean().optional(),
   createBackup: z.boolean().optional(),
