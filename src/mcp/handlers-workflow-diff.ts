@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { McpToolResponse } from '../types/n8n-api';
 import { WorkflowDiffRequest, WorkflowDiffOperation, WorkflowDiffValidationError } from '../types/workflow-diff';
 import { WorkflowDiffEngine } from '../services/workflow-diff-engine';
-import { getN8nApiClient } from './handlers-n8n-manager';
+import { getN8nApiClient, tryParseJson } from './handlers-n8n-manager';
 import { N8nApiError, getUserFriendlyErrorMessage } from '../utils/n8n-errors';
 import { logger } from '../utils/logger';
 import { InstanceContext } from '../types/instance-context';
@@ -35,12 +35,6 @@ function getValidator(repository: NodeRepository): WorkflowValidator {
 const NODE_TARGETING_OPERATIONS = new Set([
   'updateNode', 'removeNode', 'moveNode', 'enableNode', 'disableNode'
 ]);
-
-// Parse JSON strings to values — VS Code extension sends arrays as JSON strings (#600)
-function tryParseJson(val: unknown): unknown {
-  if (typeof val !== 'string') return val;
-  try { return JSON.parse(val); } catch { return val; }
-}
 
 // Zod schema for the diff request
 const workflowDiffSchema = z.object({
